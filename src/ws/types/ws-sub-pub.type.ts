@@ -43,3 +43,28 @@ export type TTransactionSubParam = TTickerSubParam;
 export type T_TRANSACTION_SUB = TSubscribeWrapper<TTransactionSubParam, 'sub.deal'>;
 
 export type T_TRANSACTION_UNSUB = TSubscribeWrapper<TTransactionSubParam, 'unsub.deal'>;
+
+export type TTransactionAnswerItem = {
+  p: number, // decimal, transaction price
+  v: number, // decimal, volume
+  T: number, // int, transaction direction,1:purchase,2:sell
+  O: number, // int, open position?, 1: Yes,2: No, vol is the additional position when O is 1
+  M: number, // int, Is it auto-transact ? 1: Yes,2: No
+  t: number, // long, transaction time
+}
+
+export type T_TRANSACTION_ANSWER = TAnswerWrapper<TTransactionAnswerItem, 'push.deal'> & { symbol: string };
+
+// TODO Depth
+
+// TODO K-line
+
+// TODO Funding rate
+
+// TODO Index price
+
+// TODO Fair price
+
+/**
+ * ========================================== PRIVATE CHANNELS ===============================================
+ */
