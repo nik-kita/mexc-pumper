@@ -14,12 +14,7 @@ export class SignGenerator {
     query?: object,
     body?: object,
   }) {
-        console.log('this.timestamp', this.timestamp);
-        console.log(process.env.ACCESS_KEY);
-        console.log(process.env.SECRET_KEY);
         const stringToSign = `${process.env.ACCESS_KEY}${this.timestamp}${this.processingQueryString(data.query)}${data.body || ''}`;
-
-        console.log('stringToSign', stringToSign);
 
         return this.processingSignature(stringToSign);
     }

@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-export const BASE_URL = 'https://contract.mexc.com';
+export const BASE_URL = 'https://www.mexc.com';
 
 export enum GetEnum {
   SYMBOLS = '/open/api/v2/market/symbols',
