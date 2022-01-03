@@ -1,4 +1,4 @@
-import { OrderStateEnum, OrderTypeEnum, TradeTypeEnum } from '../api-enums.global';
+import { OrderStateEnum, OrderTypeEnum, TradeTypeEnum } from './api-props.enum';
 
 export type T_CODE_RES = {
   code: number,
