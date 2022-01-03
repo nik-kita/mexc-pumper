@@ -76,3 +76,7 @@ export type TLoginParamSub = {
 }
 
 export type T_SEND_LOGIN = TSendWrapper<TLoginParamSub, 'login'>;
+
+export type T_LOGIN_ANSWER = TAnswerWrapper<'success', 'rs.login'>;
+
+// TODO complete all private channels
