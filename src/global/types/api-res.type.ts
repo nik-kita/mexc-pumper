@@ -1,3 +1,5 @@
+import { OrderStateEnum, OrderTypeEnum, TradeTypeEnum } from '../api-enums.global';
+
 export type T_CODE_RES = {
   code: number,
 }
@@ -64,7 +66,7 @@ export type TLatestDeal = {
   trade_time: number, // long, deal time
   trade_price: string, // deal price
   trade_quantity: string, // volume
-  trade_type: 'BID' | 'ASK', // trade type
+  trade_type: TradeTypeEnum, // trade type
 }
 
 export type T_LATEST_DEALS_RES = TResWrapper<TLatestDeal[]>;
@@ -90,8 +92,6 @@ export type T_CANCEL_ORDER_RES = TResWrapper<[key: string][]>;
 
 // TODO POST /open/api/v2/order/place_batch
 
-export type TOrderState = 'NEW' | 'FILLED' | 'PARTIALLY_FILLED' | 'CANCELED' | 'PARTIALLY_CANCELED';
-
 export type TOpenOrder = {
   symbol: string, // symbol name
   id: string, // order id
@@ -100,8 +100,8 @@ export type TOpenOrder = {
   remain_quantity: string, // remaining quantity
   remain_amount: string, // remaining volume
   create_time: string, // order create time
-  state: TOrderState, // order state
-  type: string, //  order type
+  state: OrderStateEnum, // order state
+  type: OrderTypeEnum, //  order type
   client_order_id: string, // client order id
 }
 
