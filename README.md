@@ -3,3 +3,6 @@
 * in code: T*: `type TExample = 'example'`
 * Complete general types should be in upper-dashes case, especially if they contains child types: `type T_EXAMPLE = { child: TChild }`
 > Types may be not only tsc type, but also constants or classes if they are used like type
+
+# GENERAL CLASSES (hope they will be uses as templates for future same projects)
+* file naming: *.general.ts `super.general.ts`

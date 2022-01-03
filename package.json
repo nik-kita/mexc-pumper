@@ -12,7 +12,10 @@
     "url": "git+https://github.com/nik-kita/mexc-pumper.git"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/moment": "^2.13.0",
     "@types/node": "^17.0.5",
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
     "eslint": "^8.6.0",
@@ -33,5 +36,10 @@
     "dist/**/*"
   ],
   "description": "",
-  "dependencies": {}
+  "dependencies": {
+    "crypto": "^1.0.1",
+    "dotenv": "^10.0.0",
+    "moment": "^2.29.1",
+    "qs": "^6.10.2"
+  }
 }
