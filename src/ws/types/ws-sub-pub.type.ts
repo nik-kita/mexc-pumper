@@ -1,4 +1,4 @@
-type TAnswerWrapper<TAnswer, ChannelName> = {
+export type T_WS_CHANNEL_ANSWER<TAnswer, ChannelName> = {
   channel: ChannelName,
   data: TAnswer,
   ts: number, // timestamp
@@ -13,10 +13,7 @@ export type T_SEND_PING = {
   method: 'ping',
 }
 
-export type T_PONG_ANSWER = {
-  channel: 'pong',
-  data: number // timestamp
-}
+export type T_PONG_ANSWER = Omit<T_WS_CHANNEL_ANSWER<number, 'pong'>, 'ts'>;
 
 export type T_TICKERS_SUB = TSendWrapper<{}, 'sub.tickers'>;
 
@@ -30,7 +27,7 @@ export type TTickerAnswerItem = {
   fairPrice: number, // decimal fair price
 }
 
-export type T_TICKERS_ANSWER = TAnswerWrapper<TTickerAnswerItem, 'push.tickers'>;
+export type T_TICKERS_ANSWER = T_WS_CHANNEL_ANSWER<TTickerAnswerItem, 'push.tickers'>;
 
 export type TTickerSubParam = {
   symbol: string,
@@ -53,7 +50,7 @@ export type TTransactionAnswerItem = {
   t: number, // long, transaction time
 }
 
-export type T_TRANSACTION_ANSWER = TAnswerWrapper<TTransactionAnswerItem, 'push.deal'> & { symbol: string };
+export type T_TRANSACTION_ANSWER = T_WS_CHANNEL_ANSWER<TTransactionAnswerItem, 'push.deal'> & { symbol: string };
 
 // TODO Depth
 
@@ -77,6 +74,6 @@ export type TLoginParamSub = {
 
 export type T_SEND_LOGIN = TSendWrapper<TLoginParamSub, 'login'>;
 
-export type T_LOGIN_ANSWER = TAnswerWrapper<'success', 'rs.login'>;
+export type T_LOGIN_ANSWER = T_WS_CHANNEL_ANSWER<'success', 'rs.login'>;
 
 // TODO complete all private channels
