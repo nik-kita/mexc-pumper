@@ -4,8 +4,8 @@ type TAnswerWrapper<TAnswer, ChannelName> = {
   ts: number, // timestamp
 }
 
-type TSubscribeWrapper<TParams, ChannelName> = {
-  channel: ChannelName,
+type TSendWrapper<TParams, MethodName> = {
+  method: MethodName,
   data: TParams,
 }
 
@@ -18,9 +18,9 @@ export type T_PONG_ANSWER = {
   data: number // timestamp
 }
 
-export type T_TICKERS_SUB = TSubscribeWrapper<{}, 'sub.tickers'>;
+export type T_TICKERS_SUB = TSendWrapper<{}, 'sub.tickers'>;
 
-export type T_TICKERS_UNSUB = TSubscribeWrapper<{}, 'unsub.tickers'>
+export type T_TICKERS_UNSUB = TSendWrapper<{}, 'unsub.tickers'>
 
 export type TTickerAnswerItem = {
   symbol: string, // the name of the contract
@@ -36,13 +36,13 @@ export type TTickerSubParam = {
   symbol: string,
 }
 
-export type T_TICKER_SUB = TSubscribeWrapper<TTickerSubParam, 'sub.ticker'>;
+export type T_TICKER_SUB = TSendWrapper<TTickerSubParam, 'sub.ticker'>;
 
 export type TTransactionSubParam = TTickerSubParam;
 
-export type T_TRANSACTION_SUB = TSubscribeWrapper<TTransactionSubParam, 'sub.deal'>;
+export type T_TRANSACTION_SUB = TSendWrapper<TTransactionSubParam, 'sub.deal'>;
 
-export type T_TRANSACTION_UNSUB = TSubscribeWrapper<TTransactionSubParam, 'unsub.deal'>;
+export type T_TRANSACTION_UNSUB = TSendWrapper<TTransactionSubParam, 'unsub.deal'>;
 
 export type TTransactionAnswerItem = {
   p: number, // decimal, transaction price
@@ -68,3 +68,11 @@ export type T_TRANSACTION_ANSWER = TAnswerWrapper<TTransactionAnswerItem, 'push.
 /**
  * ========================================== PRIVATE CHANNELS ===============================================
  */
+
+export type TLoginParamSub = {
+  apiKey: string,
+  reqTime: string,
+  signature: string,
+}
+
+export type T_SEND_LOGIN = TSendWrapper<TLoginParamSub, 'login'>;
