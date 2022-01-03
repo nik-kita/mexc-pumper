@@ -1,8 +1,8 @@
-export type TCodeRes = {
+export type T_CODE_RES = {
   code: number,
 }
 
-export type TAllSymbolsRes = {
+export type T_ALL_SYMBOLS_RES = {
   symbol: string, // symbol name
   state: string, // symbol status, whether available for trading
   price_scale: number, // integer, price precision
@@ -17,20 +17,20 @@ export type TAllSymbolsRes = {
   code: number,
 }
 
-export type TCurrentSystemTime = {
+export type T_CURRENT_SYSTEM_TIME = {
   data: number // long, System timestamp, milliseconds since Unix epoch
   code: number,
 }
 
-export type TPingRes = TCodeRes;
+export type T_PING_RES = T_CODE_RES;
 
-export type TApiDefaultSymbolsRes = {
+export type T_API_DEFAULT_SYMBOL_RES = {
   code: number, // integer Status code
   message: string, // Misdescription (If there has )）
   data: string[], // array of symbols
 }
 
-export type TTickerInformationRes = {
+export type T_TICKER_INFORMATION_RES = {
   symbol: string, // symbol name
   volume: string, // deal total amount of this period
   high: string, // the highest price of this period
@@ -41,4 +41,19 @@ export type TTickerInformationRes = {
   last: string, // the latest deal price
   time: string, // timestamp of the latest quote
   change_rate: string, //  price change rate of this period
+}
+
+export type TMarketDepthBidAsk = {
+  price: string,
+  quantity: string,
+}
+
+export type TMarketData = {
+  asks: TMarketDepthBidAsk[],
+  bids: TMarketDepthBidAsk[],
+}
+
+export type T_MARKET_DEPTH_RES = {
+  code: number,
+  data: TMarketData,
 }
