@@ -2,6 +2,8 @@
   "name": "mexc-pumper",
   "version": "1.0.0",
   "scripts": {
+    "build": "npx tsc -p tsconfig.json",
+    "start": "node dist",
     "prepare": "npm run build",
     "version": "git add -A src",
     "postversion": "git push",
@@ -12,9 +14,10 @@
     "url": "git+https://github.com/nik-kita/mexc-pumper.git"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/dotenv": "^8.2.0",
     "@types/moment": "^2.13.0",
-    "@types/node": "^17.0.5",
+    "@types/node": "^17.0.7",
     "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "^5.8.1",
     "@typescript-eslint/parser": "^5.8.1",
@@ -37,6 +40,7 @@
   ],
   "description": "",
   "dependencies": {
+    "axios": "^0.24.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
     "moment": "^2.29.1",
