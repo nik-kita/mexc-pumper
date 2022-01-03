@@ -8,7 +8,11 @@ export class MexSocket {
 
     private pr = new Promitter();
 
-    private constructor() {}
+    private constructor() {
+        this.pr.on('close', () => {
+            this.ORIGINAL_WS_CLIENT.close();
+        });
+    }
 
     public static async open() {
         const mex = new MexSocket();
@@ -31,10 +35,14 @@ export class MexSocket {
         return mex;
     }
 
+    public async close() {
+        return this.pr.emitAndWaitComplete('close');
+    }
+
     public subscribe(data: any) {
         this.ORIGINAL_WS_CLIENT.send(JSON.stringify(data));
         this.pr.on('push.tickers', (message) => {
-            console.log(message);
+            console.log(message.data.length);
         });
     }
 }
