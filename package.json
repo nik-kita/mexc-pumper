@@ -41,10 +41,12 @@
   "description": "",
   "dependencies": {
     "@nik-kita/promitter": "^1.2.0",
+    "@types/ioredis": "^4.28.7",
     "@types/ws": "^8.2.2",
     "axios": "^0.24.0",
     "crypto": "^1.0.1",
     "dotenv": "^10.0.0",
+    "ioredis": "^4.28.2",
     "moment": "^2.29.1",
     "qs": "^6.10.2",
     "ws": "^8.4.0"
