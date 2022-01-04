@@ -22,7 +22,7 @@ export type TTickerAnswerItem = {
   riseFallRate: number, // decimal, rise/fall rate
   fairPrice: number, // decimal fair price
 }
-export type T_TICKERS_ANSWER = T_WS_CHANNEL_ANSWER<TTickerAnswerItem, WsChannelEnum.PUSH_TICKERS>;
+export type T_TICKERS_ANSWER = T_WS_CHANNEL_ANSWER<TTickerAnswerItem[], WsChannelEnum.PUSH_TICKERS>;
 export type TTickerSubParam = {
   symbol: string,
 }
