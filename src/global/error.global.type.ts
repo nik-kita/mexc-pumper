@@ -1,0 +1,18 @@
+export const TError = {
+    400: 'Invalid parameter' as const,
+    401: 'Invalid signature, fail to pass the validation' as const,
+    429: 'Too many requests, rate limit rule is violated' as const,
+    10072: 'Invalid access key' as const,
+    10073: 'Invalid request time' as const,
+    30000: 'Trading is suspended for the requested symbol' as const,
+    30001: 'Current trading type (bid or ask) is not allowed' as const,
+    30002: 'Invalid trading amount, smaller than the symbol minimum trading amount' as const,
+    30003: 'Invalid trading amount, greater than the symbol maximum trading amount' as const,
+    30004: 'Insufficient balance' as const,
+    30005: 'Oversell error' as const,
+    30010: 'Price out of allowed range' as const,
+    30016: 'Market is closed' as const,
+    30019: 'Orders count over limit for batch processing' as const,
+    30020: 'Restricted symbol, API access is not allowed for the time being' as const,
+    30021: 'Invalid symbol' as const,
+};
