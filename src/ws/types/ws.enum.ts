@@ -23,6 +23,7 @@ export enum WsChannelEnum {
 export enum WsMethodEnum {
   PING = 'ping',
   SUB_TICKERS = 'sub.tickers',
+  UNSUB_TICKERS = 'unsub.tickers',
   SUB_TICKER = 'sub.ticker',
   UNSUB_TICKER = 'unsub.ticker',
   SUB_DEAL = 'sub.deal',

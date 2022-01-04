@@ -1,48 +1,50 @@
-import Ws, { WebSocket } from 'ws';
 import Promitter from '@nik-kita/promitter';
-import { WsMethodEnum, WS_CONNECTION_ADDRESS } from './types/ws.enum';
+import Ws, { WebSocket } from 'ws';
+import { PubSubResolver } from './pub-sub-resolver';
 import { T_WS_CHANNEL_ANSWER } from './types/ws-sub-pub.type';
+import { WS_CONNECTION_ADDRESS } from './types/ws.enum';
 
 export class MexSocket {
-    private ORIGINAL_WS_CLIENT!: WebSocket;
-
-    private pr = new Promitter();
-
-    private constructor() {
-        this.pr.on('close', () => {
-            this.ORIGINAL_WS_CLIENT.close();
+    private constructor(
+        private ws: WebSocket,
+        private promitter: Promitter,
+        private pubSubResolver: PubSubResolver,
+    ) {
+        this.promitter.on('close', () => {
+            this.ws.close();
         });
     }
 
     public static async open() {
-        const mex = new MexSocket();
-
-        mex.ORIGINAL_WS_CLIENT = new Ws(WS_CONNECTION_ADDRESS)
+        const promitter = new Promitter();
+        const ws = new Ws(WS_CONNECTION_ADDRESS)
             .on('open', () => {
-                mex.pr.emit('open');
+                promitter.emit('open');
             }).on('close', () => {
-                mex.pr.emit('close');
+                promitter.emit('close');
             }).on('error', () => {
-                mex.pr.emit('error');
+                promitter.emit('error');
             })
             .on('message', (data: unknown) => {
                 const message = JSON.parse(String(data)) as T_WS_CHANNEL_ANSWER<any, any>;
-                mex.pr.emit(message.channel, message);
+                promitter.emit(message.channel, message);
             });
 
-        await mex.pr.wait('open');
+        const pubSubResolver = new PubSubResolver(promitter, ws);
+        const mex = new MexSocket(
+            ws,
+            promitter,
+            pubSubResolver,
+        );
+
+        await promitter.wait('open');
 
         return mex;
     }
 
     public async close() {
-        return this.pr.emitAndWaitComplete('close');
+        return this.promitter.emitAndWaitComplete('close');
     }
 
-    public subscribe(data: any) {
-        this.ORIGINAL_WS_CLIENT.send(JSON.stringify(data));
-        this.pr.on('push.tickers', (message) => {
-            console.log(message.data.length);
-        });
-    }
+    public subscribe = this.pubSubResolver;
 }

@@ -1,24 +1,20 @@
+import { WsMethodEnum, WsChannelEnum } from './ws.enum';
+
 export type T_WS_CHANNEL_ANSWER<TAnswer, ChannelName> = {
   channel: ChannelName,
   data: TAnswer,
   ts: number, // timestamp
 }
-
 type TSendWrapper<TParams, MethodName> = {
   method: MethodName,
   data: TParams,
 }
-
 export type T_SEND_PING = {
-  method: 'ping',
+  method: WsMethodEnum.PING,
 }
-
-export type T_PONG_ANSWER = Omit<T_WS_CHANNEL_ANSWER<number, 'pong'>, 'ts'>;
-
-export type T_TICKERS_SUB = TSendWrapper<{}, 'sub.tickers'>;
-
-export type T_TICKERS_UNSUB = TSendWrapper<{}, 'unsub.tickers'>
-
+export type T_PONG_ANSWER = Omit<T_WS_CHANNEL_ANSWER<number, WsChannelEnum.PONG>, 'ts'>;
+export type T_TICKERS_SUB = TSendWrapper<{}, WsMethodEnum.SUB_TICKERS>;
+export type T_TICKERS_UNSUB = TSendWrapper<{}, WsMethodEnum.UNSUB_TICKERS>
 export type TTickerAnswerItem = {
   symbol: string, // the name of the contract
   lastPrice: number, // decimal, the last price
@@ -26,21 +22,15 @@ export type TTickerAnswerItem = {
   riseFallRate: number, // decimal, rise/fall rate
   fairPrice: number, // decimal fair price
 }
-
-export type T_TICKERS_ANSWER = T_WS_CHANNEL_ANSWER<TTickerAnswerItem, 'push.tickers'>;
-
+export type T_TICKERS_ANSWER = T_WS_CHANNEL_ANSWER<TTickerAnswerItem, WsChannelEnum.PUSH_TICKERS>;
 export type TTickerSubParam = {
   symbol: string,
 }
-
-export type T_TICKER_SUB = TSendWrapper<TTickerSubParam, 'sub.ticker'>;
-
+export type T_TICKER_SUB = TSendWrapper<TTickerSubParam, WsMethodEnum.SUB_TICKER>;
+export type T_TICKER_UNSUB = TSendWrapper<TTickerSubParam, WsMethodEnum.UNSUB_TICKER>;
 export type TTransactionSubParam = TTickerSubParam;
-
-export type T_TRANSACTION_SUB = TSendWrapper<TTransactionSubParam, 'sub.deal'>;
-
-export type T_TRANSACTION_UNSUB = TSendWrapper<TTransactionSubParam, 'unsub.deal'>;
-
+export type T_TRANSACTION_SUB = TSendWrapper<TTransactionSubParam, WsMethodEnum.SUB_DEAL>;
+export type T_TRANSACTION_UNSUB = TSendWrapper<TTransactionSubParam, WsMethodEnum.UNSUB_DEAL>;
 export type TTransactionAnswerItem = {
   p: number, // decimal, transaction price
   v: number, // decimal, volume
@@ -49,8 +39,7 @@ export type TTransactionAnswerItem = {
   M: number, // int, Is it auto-transact ? 1: Yes,2: No
   t: number, // long, transaction time
 }
-
-export type T_TRANSACTION_ANSWER = T_WS_CHANNEL_ANSWER<TTransactionAnswerItem, 'push.deal'> & { symbol: string };
+export type T_TRANSACTION_ANSWER = T_WS_CHANNEL_ANSWER<TTransactionAnswerItem, WsChannelEnum.PUSH_DEAL> & { symbol: string };
 
 // TODO Depth
 
@@ -72,8 +61,17 @@ export type TLoginParamSub = {
   signature: string,
 }
 
-export type T_SEND_LOGIN = TSendWrapper<TLoginParamSub, 'login'>;
+export type T_SEND_LOGIN = TSendWrapper<TLoginParamSub, WsMethodEnum.LOGIN>;
 
-export type T_LOGIN_ANSWER = T_WS_CHANNEL_ANSWER<'success', 'rs.login'>;
+export type T_LOGIN_ANSWER = T_WS_CHANNEL_ANSWER<'success', WsChannelEnum.RS_LOGIN>;
 
 // TODO complete all private channels
+
+export type T_WS_SUBSCRIPTION = T_SEND_PING
+  | T_TICKERS_SUB
+  | T_TICKERS_SUB
+  | T_TICKERS_UNSUB
+  | T_TICKER_SUB
+  | T_TRANSACTION_SUB
+  | T_TRANSACTION_UNSUB
+  | T_SEND_LOGIN
