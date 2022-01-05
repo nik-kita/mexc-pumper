@@ -2,13 +2,13 @@
   "name": "mexc-pumper",
   "version": "1.0.0",
   "scripts": {
-    "build": "npx tsc -p tsconfig.json",
+    "build": "rm -fr dist && npx tsc -p tsconfig.json",
     "start": "node dist",
     "prepare": "npm run build",
     "version": "git add -A src",
     "postversion": "git push",
     "lint": "npx eslint --fix 'src/**/*.ts'",
-    "cli:driver": "node dist/cli/pause.cli.js"
+    "cli:driver": "node dist/cli/driver.cli.js"
   },
   "repository": {
     "type": "git",
