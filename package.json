@@ -8,7 +8,7 @@
     "version": "git add -A src",
     "postversion": "git push",
     "lint": "npx eslint --fix 'src/**/*.ts'",
-    "cli:pause": "node dist/cli/pause.cli.js"
+    "cli:driver": "node dist/cli/pause.cli.js"
   },
   "repository": {
     "type": "git",

@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import Redis, { RedisOptions } from 'ioredis';
 
 const options: RedisOptions = {
@@ -6,7 +7,4 @@ const options: RedisOptions = {
     db: 7,
 };
 
-export const REDIS = {
-    RedisPublisher: new Redis(options),
-    RedisSubscriber: new Redis(options),
-};
+export const RedisSubscriber = new Redis(options);

@@ -1,9 +1,6 @@
-/* eslint-disable no-await-in-loop */
-import prompts from 'prompts';
-
-const PAUSE_INPUT = {
+export const PAUSE_EXIT_SELECT = {
     type: 'select' as const,
-    name: 'pause' as const,
+    name: 'pauseOrExit' as const,
     message: 'Feel free to pick pause or exit at any time:',
     choices: [
         { title: 'Pause', value: 'pause' as const },
@@ -12,9 +9,9 @@ const PAUSE_INPUT = {
     initial: 0,
 };
 
-const CONTINUE_INPUT = {
+export const CONTINUE_EXIT_SELECT = {
     type: 'select' as const,
-    name: 'continue' as const,
+    name: 'continueOrExit' as const,
     message: 'You may continue logging at any time',
     choices: [
         { title: 'Continue', value: 'continue' as const },
@@ -22,30 +19,12 @@ const CONTINUE_INPUT = {
     ],
 };
 
-const START_INPUT = {
+export const START_EXIT_SELECT = {
     type: 'select' as const,
-    name: 'start' as const,
+    name: 'startOrExit' as const,
     message: 'Start?',
     choices: [
         { title: 'Yes', value: 'start' as const },
         { title: 'Exit', dexcription: 'Will exit programm', value: 'exit' as const },
     ],
 };
-
-(async () => {
-    const { start } = await prompts(START_INPUT);
-
-    if (start === 'exit') return;
-
-    const exitNow = false;
-
-    while (!exitNow) {
-        const { pause } = await prompts(PAUSE_INPUT);
-
-        if (pause === 'exit') return;
-
-        const { continue: continues } = await prompts(CONTINUE_INPUT);
-
-        if (continues === 'exit') return;
-    }
-})();

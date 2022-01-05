@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { REDIS } from '../common/redis';
+import { RedisPublisher } from '../common/redis/redis-publisher';
 import { TTickerAnswerItem, T_TICKERS_ANSWER } from '../ws/types/ws-sub-pub.type';
 
 export type TUpdatedCoin = TTickerAnswerItem & {
@@ -14,10 +14,10 @@ function calculateAgio(startPrice: number, lastPrice: number): number {
 export class TickersMonitoring {
     monitoring({ data }: T_TICKERS_ANSWER) {
         (data as unknown as TUpdatedCoin[]).forEach((coin) => {
-            REDIS.RedisPublisher.exists(coin.symbol)
+            RedisPublisher.exists(coin.symbol)
                 .then((isFirstTime) => {
                     if (!isFirstTime) {
-                        REDIS.RedisPublisher
+                        RedisPublisher
                             .set(
                                 coin.symbol,
                                 JSON.stringify(coin),
@@ -25,7 +25,7 @@ export class TickersMonitoring {
                                 15,
                             );
                     } else {
-                        REDIS.RedisPublisher.get(coin.symbol).then((c) => {
+                        RedisPublisher.get(coin.symbol).then((c) => {
                             console.log(JSON.stringify(c));
                         });
                     }
