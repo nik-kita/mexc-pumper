@@ -12,8 +12,6 @@ export class PubSubResolver {
     ) { /* TODO */ }
 
     public ['ping'](subscription: T_SEND_PING) {
-        this.ws.send(JSON.stringify(subscription));
-
         return {
             onAnswer: (cb: (answer: T_PONG_ANSWER) => void) => {
                 this.ws.send(JSON.stringify(subscription));
